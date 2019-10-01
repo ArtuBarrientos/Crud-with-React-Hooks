@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const EditUserForm = props => {
+const ModalEditForm= props => {
   const [ processor, setProcessor ] = useState(props.currentList)
 
   useEffect(
@@ -9,7 +9,7 @@ const EditUserForm = props => {
     },
     [ props ]
   )
-  // You can tell React to skip applying an effect if certain values haven’t changed between re-renders. [ props ]
+//You can tell React to skip applying an effect if certain values haven’t changed between re-renders. [ props ]
 
   const handleInputChange = event => {
     const { name, value } = event.target
@@ -41,4 +41,4 @@ const EditUserForm = props => {
   )
 }
 
-export default EditUserForm
+export default ModalEditForm

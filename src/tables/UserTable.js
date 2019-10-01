@@ -4,6 +4,7 @@ const UserTable = props => (
   <table>
     <thead>
       <tr>
+        <th>#</th>
         <th>Nombre</th>
         <th>Nucleos</th>
         <th>Hilos</th>
@@ -15,6 +16,7 @@ const UserTable = props => (
       {props.processor.length > 0 ? (
         props.processor.map(item => (
           <tr key={item.id}>
+            <td>{item.id}</td>
             <td>{item.nombre}</td>
             <td>{item.nucleos}</td>
             <td>{item.hilos}</td>

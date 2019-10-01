@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const AddUserForm = props => {
+const ModalAddForm= props => {
 	const initialFormState = { id: null, nombre: '', nucleos: '', hilos: '', tdp: '' }
 	const [ processor, setProcessor ] = useState(initialFormState)
 
@@ -33,4 +33,4 @@ const AddUserForm = props => {
 	)
 }
 
-export default AddUserForm
+export default ModalAddForm
