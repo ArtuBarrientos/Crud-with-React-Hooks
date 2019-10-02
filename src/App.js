@@ -1,15 +1,23 @@
 import React,{ Component } from 'react'
-import DataBase from './components/DataBase'
-
+import DataBase from './DataBase'
+import {
+    BrowserRouter as ReactRouter,
+    Route
+  } from 'react-router-dom';
+import DataList from './containers/DataList';
+import NavBar from './components/NavBar';
 
 
 class App extends Component{
 
    render(){
 		return (
-				<div className="container">
-					<DataBase/>
-				</div>
+		<ReactRouter>
+			    <NavBar/>
+				<Route exact path="/" component={DataBase}></Route>
+				<Route exact path="/Datos/:id" component={DataList}></Route>
+				
+		</ReactRouter>
 			)
 		}
 

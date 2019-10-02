@@ -1,12 +1,12 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import UserTable from '../tables/UserTable'
 import axios from 'axios';
-import config from '../config/secret';
-import ModalAddForm from '../forms/ModalAddForm';
-import ModalEditForm from '../forms/ModalEditForm';
+import config from './config/secret';
+import ModalAddForm from './forms/ModalAddForm';
+import ModalEditForm from './forms/ModalEditForm';
+import ProcessorsTable from './tables/ProcessorsTable';
 
 
-const DataBase = () => {
+function DataBase(){
 
 	const initialFormState = { id: null, nombre: '', nucleos: '', hilos: '', tdp:'' }
 	// Setting state
@@ -126,6 +126,7 @@ const DataBase = () => {
 	}
 
 
+ 
 	return (
 		<div className="container">
 			<h1>CRUD App con Hooks</h1>
@@ -150,7 +151,7 @@ const DataBase = () => {
 				</div>
 				<div className="flex-large">
 					<h2>Lista de Procesadores</h2>
-					<UserTable processor={processor} editRow={editRow} deleteUser={deleteId} />
+					<ProcessorsTable processor={processor} editRow={editRow} deleteUser={deleteId} />
 				</div>
 			</div>
 		</div>

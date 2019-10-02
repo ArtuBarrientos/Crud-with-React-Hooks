@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const ModalEditForm= props => {
+function ModalEditForm(props){
   const [ processor, setProcessor ] = useState(props.currentList)
 
   useEffect(

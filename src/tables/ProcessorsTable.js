@@ -1,10 +1,11 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
-const UserTable = props => (
+
+const ProcessorsTable = props => (
   <table>
     <thead>
       <tr>
-        <th>#</th>
         <th>Nombre</th>
         <th>Nucleos</th>
         <th>Hilos</th>
@@ -16,8 +17,8 @@ const UserTable = props => (
       {props.processor.length > 0 ? (
         props.processor.map(item => (
           <tr key={item.id}>
-            <td>{item.id}</td>
-            <td>{item.nombre}</td>
+            
+            <td><Link to={`/Datos/${item.id}`}>{item.nombre}</Link></td>
             <td>{item.nucleos}</td>
             <td>{item.hilos}</td>
             <td>{item.tdp}</td>
@@ -48,4 +49,4 @@ const UserTable = props => (
   </table>
 )
 
-export default UserTable
+export default ProcessorsTable
