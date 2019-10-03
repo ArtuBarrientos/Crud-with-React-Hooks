@@ -16,7 +16,6 @@ class App extends Component{
 			    <NavBar/>
 				<Route exact path="/" component={DataBase}></Route>
 				<Route exact path="/Datos/:id" component={DataList}></Route>
-				
 		</ReactRouter>
 			)
 		}

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import axios from 'axios';
 import config from './config/secret';
-import ModalAddForm from './forms/ModalAddForm';
-import ModalEditForm from './forms/ModalEditForm';
+import AddForm from './forms/AddForm';
+import EditForm from './forms/EditForm';
 import ProcessorsTable from './tables/ProcessorsTable';
 
 
@@ -135,7 +135,7 @@ function DataBase(){
 					{editing ? (
 						<Fragment>
 							<h2>Editar</h2>
-							<ModalEditForm
+							<EditForm
 								editing={editing}
 								setEditing={setEditing}
 								currentList={currentList}
@@ -145,7 +145,7 @@ function DataBase(){
 					) : (
 						<Fragment>
 							<h2>Insertar Datos</h2>
-							<ModalAddForm addUser={datosAdd} />
+							<AddForm addUser={datosAdd} />
 						</Fragment>
 					)}
 				</div>

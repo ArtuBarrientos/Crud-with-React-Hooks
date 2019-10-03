@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-function ModalEditForm(props){
+function EditForm(props){
   const [ processor, setProcessor ] = useState(props.currentList)
 
   useEffect(
@@ -41,4 +41,4 @@ function ModalEditForm(props){
   )
 }
 
-export default ModalEditForm
+export default EditForm

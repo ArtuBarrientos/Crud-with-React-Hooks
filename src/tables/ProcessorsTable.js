@@ -7,9 +7,9 @@ const ProcessorsTable = props => (
     <thead>
       <tr>
         <th>Nombre</th>
-        <th>Nucleos</th>
+     {/*<th>Nucleos</th>
         <th>Hilos</th>
-        <th>Tdp</th>
+        <th>Tdp</th>*/}
         <th>Acciones</th>
       </tr>
     </thead>
@@ -19,9 +19,9 @@ const ProcessorsTable = props => (
           <tr key={item.id}>
             
             <td><Link to={`/Datos/${item.id}`}>{item.nombre}</Link></td>
-            <td>{item.nucleos}</td>
+         {/*<td>{item.nucleos}</td>
             <td>{item.hilos}</td>
-            <td>{item.tdp}</td>
+            <td>{item.tdp}</td>*/}
             <td>
               <button
                 onClick={() => {

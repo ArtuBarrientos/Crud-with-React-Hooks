@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function ModalAddForm(props) {
+function AddForm(props) {
 	const initialFormState = { id: null, nombre: '', nucleos: '', hilos: '', tdp: '' }
 	const [ processor, setProcessor ] = useState(initialFormState)
 
@@ -33,4 +33,4 @@ function ModalAddForm(props) {
 	)
 }
 
-export default ModalAddForm
+export default AddForm
