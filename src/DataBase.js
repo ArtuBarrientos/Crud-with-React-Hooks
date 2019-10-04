@@ -2,17 +2,17 @@ import React, { useState, useEffect, Fragment } from 'react'
 import axios from 'axios';
 import config from './config/secret';
 import AddForm from './forms/AddForm';
-import EditForm from './forms/EditForm';
+//import EditForm from './forms/EditForm';
 import ProcessorsTable from './tables/ProcessorsTable';
 
 
 function DataBase(){
 
-	const initialFormState = { id: null, nombre: '', nucleos: '', hilos: '', tdp:'' }
+	//const initialFormState = { id: null, nombre: '', nucleos: '', hilos: '', tdp:'' }
 	// Setting state
 	const [ processor, setProcessor ] = useState([])
-	const [ currentList, setCurrentList ] = useState(initialFormState)
-	const [ editing, setEditing ] = useState(false)
+	//const [ currentList, setCurrentList ] = useState(initialFormState)
+	//const [ editing, setEditing ] = useState(false)
 	const [references, setReferences ] = useState('');
 
 
@@ -95,11 +95,11 @@ function DataBase(){
 			console.log(err);
 			});
 		setProcessor(processor.filter(user => user.id !== id))
-		setEditing(false)	
+		//setEditing(false)	
 	}
 	 
 	//Actualizar
-	const updateList = (id, updated) => {
+	/*const updateList = (id, updated) => {
 		axios.put(config.url+"/api/processor/"+ id,{
 			  nombre: updated.nombre, 
 			  nucleos: updated.nucleos, 
@@ -114,44 +114,28 @@ function DataBase(){
 	  }); 
 	    setEditing(false)
 		setProcessor(processor.map(processor => (processor.id === id ? updated : processor)))
-      }
+      }*/
 
-	const editRow = processor => {
+	/*const editRow = processor => {
 		setEditing(true)
 		setCurrentList({ id: processor.id, 
 						 nombre: processor.nombre, 
 						 nucleos: processor.nucleos, 
 						 hilos: processor.hilos, 
 						 tdp: processor.tdp})
-	}
+	}*/
 
 
  
 	return (
 		<div className="container">
-			<h1>CRUD App con Hooks</h1>
-			<div className="flex-row">
-				<div className="flex-large">
-					{editing ? (
-						<Fragment>
-							<h2>Editar</h2>
-							<EditForm
-								editing={editing}
-								setEditing={setEditing}
-								currentList={currentList}
-								updateList={updateList}
-							/>
-						</Fragment>
-					) : (
-						<Fragment>
-							<h2>Insertar Datos</h2>
-							<AddForm addUser={datosAdd} />
-						</Fragment>
-					)}
+			<div >
+			    <div>
+					<h2>Lista de Procesadores</h2>
+					<ProcessorsTable processor={processor} deleteUser={deleteId} />
 				</div>
 				<div className="flex-large">
-					<h2>Lista de Procesadores</h2>
-					<ProcessorsTable processor={processor} editRow={editRow} deleteUser={deleteId} />
+							<AddForm addUser={datosAdd} />
 				</div>
 			</div>
 		</div>
