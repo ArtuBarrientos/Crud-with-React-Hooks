@@ -1,8 +1,14 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import swal from 'sweetalert';
 
 
-const ProcessorsTable = props => (
+
+
+function ProcessorsTable (props){
+
+  
+return(
   <div className="container row d-flex justify-content-center">
       {props.processor.length > 0 ? (
         props.processor.map(item => (
@@ -22,7 +28,7 @@ const ProcessorsTable = props => (
                             </Link>
                               <p
                                   style={{cursor:"pointer", color:"blue"}}
-                                  onClick={() => props.deleteUser(item.id)}
+                                  onClick={() => props.deleteItemById(item.id)}
                                  
                                 >
                                   Eliminar
@@ -39,7 +45,9 @@ const ProcessorsTable = props => (
         </div>
       )}
   </div>
-  
 )
+  
+  
+      }
 
 export default ProcessorsTable

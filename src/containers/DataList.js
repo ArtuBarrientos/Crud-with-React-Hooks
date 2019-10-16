@@ -2,9 +2,10 @@ import React,{ useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../config/secret';
 import EditForm from '../forms/EditForm';
-import {Link} from 'react-router-dom';
+import { inject, observer } from 'mobx-react'
 
-function DataList({match}){
+
+function DataList({match,ListStore}){
   //render(){
     //const { match } = this.props;
     const datosId =  match.params.id
@@ -28,7 +29,7 @@ function DataList({match}){
        [datosId]);
 
 
-       const deleteId = datosId =>{
+      const deleteId = datosId =>{
         axios.delete(config.url+"/api/processor/"+datosId
         )
         .then(res => { 
@@ -67,12 +68,13 @@ function DataList({match}){
                    nombre: datos.nombre, 
                    nucleos: datos.nucleos, 
                    hilos: datos.hilos, 
-                   tdp: datos.tdp})
+                   tdp: datos.tdp})          
         }
 
     
     return(
       <div className="container" style={{marginTop:"1rem"}}>
+         
           <div  className="d-flex justify-content-center">
                 <div className="card" style={{width: "20rem"}}>
                     <img src={datos.image} className="card-img-top" alt=""/>
@@ -87,7 +89,7 @@ function DataList({match}){
                     </ul>
                     <div className="row card-body">
                         <div className="col">
-                            <button 
+                           <button 
                                 onClick={() => {
                                   editRow(datos)
                                 }}
@@ -95,17 +97,15 @@ function DataList({match}){
                                 data-toggle="modal" data-target="#exampleModal"
                               >
                                 Editar
-                              </button>
+                              </button>*/}
                           </div>
                           <div className="col">
-                              <Link to='/'>
-                                <button
+                              <button
                                     onClick={()=>deleteId(datos.id)}
                                     className="button muted-button"
                                   >
                                     Eliminar
                                   </button>
-                              </Link>
                           </div>  
                      </div>
                   </div>
@@ -121,5 +121,5 @@ function DataList({match}){
          }
  // }
     
-export default DataList;
+export default inject("ListStore") (observer(DataList));
 

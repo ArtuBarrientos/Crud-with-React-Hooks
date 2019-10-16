@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 
+
 function AddForm(props) {
 	const initialFormState = { id: null, nombre: '', nucleos: '', hilos: '', tdp: '' }
 	const [ processor, setProcessor ] = useState(initialFormState)
-
+    
 	const handleInputChange = event => {
 		const { name, value } = event.target
 
@@ -42,7 +43,7 @@ function AddForm(props) {
 							<button onClick={event => {
 									event.preventDefault()
 									if (!processor.nombre || !processor.nucleos || !processor.hilos || !processor.tdp) return
-									props.addUser(processor)
+									props.datosAdd(processor)
 									setProcessor(initialFormState)
 			                 }}type="button" class="btn btn-primary" data-dismiss="modal">Añadir</button>
 							</div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect,} from 'react'
 import axios from 'axios';
 import config from './config/secret';
 import AddForm from './forms/AddForm';
@@ -68,8 +68,8 @@ function DataBase(){
 		}, [references])
 	  
 	  const datosAdd = ref =>{
-		if(ref.nombre === "" || ref.nucleos === "" || ref.hilos === "" || ref.tdp === ""){
-			alert('Toda la información necesita ser llenada');
+		if(ref.nombre === "" || ref.nucleos === "" || ref.hilos === "" || ref.tdp === "" ){
+			alert("Here's the title!", "...and here's the text!")
 			return '';
 		} 
 	
@@ -85,7 +85,7 @@ function DataBase(){
 
 
 	//Eliminar
-	  const deleteId = id =>{
+	  const deleteItemById = id =>{
 			axios.delete(config.url+"/api/processor/"+id
 			)
 			.then(res => { 
@@ -94,36 +94,13 @@ function DataBase(){
 			.catch(err => {
 			console.log(err);
 			});
+			
 		setProcessor(processor.filter(user => user.id !== id))
 		//setEditing(false)	
 	}
-	 
-	//Actualizar
-	/*const updateList = (id, updated) => {
-		axios.put(config.url+"/api/processor/"+ id,{
-			  nombre: updated.nombre, 
-			  nucleos: updated.nucleos, 
-			  hilos: updated.hilos, 
-			  tdp: updated.tdp
-	  }) 
-	  .then(res => {
-		console.log(res+" actualizado correctamente");
-	  })
-	  .catch(err => {
-		console.log(err+" error de actualización");
-	  }); 
-	    setEditing(false)
-		setProcessor(processor.map(processor => (processor.id === id ? updated : processor)))
-      }*/
 
-	/*const editRow = processor => {
-		setEditing(true)
-		setCurrentList({ id: processor.id, 
-						 nombre: processor.nombre, 
-						 nucleos: processor.nucleos, 
-						 hilos: processor.hilos, 
-						 tdp: processor.tdp})
-	}*/
+	 
+	
 
 
  
@@ -132,10 +109,11 @@ function DataBase(){
 			<div >
 			    <div>
 					<h2>Lista de Procesadores</h2>
-					<ProcessorsTable processor={processor} deleteUser={deleteId} />
+					<AddForm datosAdd={datosAdd} />
+					
 				</div>
-				<div className="flex-large">
-							<AddForm addUser={datosAdd} />
+				<div>
+					<ProcessorsTable processor={processor} deleteItemById={deleteItemById} />
 				</div>
 			</div>
 		</div>
