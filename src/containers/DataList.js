@@ -2,7 +2,10 @@ import React,{ useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../config/secret';
 import EditForm from '../forms/EditForm';
-import { inject, observer } from 'mobx-react'
+import { inject, observer } from 'mobx-react';
+import swal from 'sweetalert';
+import { Link } from 'react-router-dom';
+
 
 
 function DataList({match,ListStore}){
@@ -12,7 +15,8 @@ function DataList({match,ListStore}){
     const [ editing, setEditing ] = useState(false)
     const initialFormState = { id: null, image:null ,nombre: '', nucleos: '', hilos: '', tdp:'' }
     const [ currentList, setCurrentList ] = useState(initialFormState)
-
+    
+  //Traer Lista por Id
     useEffect(() => {
         axios.get(config.url+"/api/processor/"+datosId)
         .then(res => res.data)
@@ -27,13 +31,33 @@ function DataList({match,ListStore}){
      
 
 
+//eliminar
       const deleteId = datosId =>{
-        ListStore.deleteById(datosId);
-        setDatos(datosId)
-
+        swal({
+          title: "Esta seguro de Eliminar esto?",
+          text: "No podra revertir el proceso una vez eliminado!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+          })
+          .then((willDelete) => {
+          if (willDelete) {
+              ListStore.deleteById(datosId);
+              setDatos(datosId);
+            swal("Eliminado Exitosamente!", {
+            icon: "success",
+            });
+          } else {
+            swal("Cancelado Exitosamente!");
+          }
+          });
     }
-     
 
+   
+ 
+   
+
+//actualizar
     const updateList = (id, datosId) => {
       ListStore.UpdateById(datosId);
       setDatos(datos => (datos.id === id ? datosId : datos))
@@ -54,36 +78,38 @@ function DataList({match,ListStore}){
                 <div className="card" style={{width: "20rem"}}>
                     <img src={datos.image} className="card-img-top" alt=""/>
                     <div className="card-body">
-                      <h2 className="card-title">{datos.nombre}</h2>
-                      <h4 className="card-text">Datos</h4>
+                        <h2 className="card-title">{datos.nombre}</h2>
+                        <h4 className="card-text">Datos</h4>
                     </div>
                     <ul className="list-group list-group-flush" >
-                      <li className="list-group-item">Nucleos: {datos.nucleos}</li>
-                      <li className="list-group-item">Hilos: {datos.hilos}</li>
-                      <li className="list-group-item">Tdp: {datos.tdp}</li>
+                        <li className="list-group-item">Nucleos: {datos.nucleos}</li>
+                        <li className="list-group-item">Hilos: {datos.hilos}</li>
+                        <li className="list-group-item">Tdp: {datos.tdp}</li>
                     </ul>
                     <div className="row card-body">
-                        <div className="col">
-                           <button 
-                                onClick={() => {
+                          <div className="col">
+                                <button 
+                                  onClick={() => {
                                   editRow(datos)
-                                }}
-                                className="button muted-button"
-                                data-toggle="modal" data-target="#exampleModal"
-                              >
-                                Editar
-                              </button>
+                                  }}
+                                  className="button muted-button"
+                                  data-toggle="modal" data-target="#exampleModal"
+                                  >
+                                  Editar
+                                </button>
                           </div>
                           <div className="col">
-                              <button
-                                    onClick={()=>deleteId(datos.id)}
-                                    className="button muted-button"
+                                <button
+                                  onClick={()=>deleteId(datos.id)} 
+                                  className="button muted-button"
                                   >
-                                    Eliminar
-                                  </button>
+                                  Eliminar
+                                </button>
+                                <Link to="/">
+                                </Link>
                           </div>  
-                     </div>
-                  </div>
+                    </div>
+                </div>
                   <EditForm
                     editing={editing}
                     setEditing={setEditing}

@@ -5,11 +5,11 @@ import AddForm from '../forms/AddForm';
 //import EditForm from './forms/EditForm';
 import ProcessorsTable from '../tables/ProcessorsTable';
 import { inject, observer } from 'mobx-react'
+import swal from 'sweetalert';
+
 
 
 function DataBase({ListStore}){
-
-	// Setting state
 	const [ processor, setProcessor ] = useState([])
 	const [references, setReferences ] = useState('');
 
@@ -33,24 +33,45 @@ function DataBase({ListStore}){
    //Crear
 		useEffect(()=> {
 		  ListStore.createItem(references);
-		}, [ListStore,references])
+	}, [ListStore,references])
 
-	  const datosAdd = ref =>{
-		if(ref.nombre === "" || ref.nucleos === "" || ref.hilos === "" || ref.tdp === "" ){
-			alert("llena los campos prro")
-			return '';
-		} 
-		  setReferences(ref)
-		  setProcessor([...processor, ref])
+	  const datosAdd =(references) =>{
+		  setReferences(references)
+		  setProcessor([...processor, references])
+		  swal({
+			title: "Creado Exitosamente!",
+			text: "",
+			icon: "success",
+			button: "Vale",
+		  });
 		}
-	  
+	    
 
 
 	//Eliminar
 	  const deleteItemById = id =>{
-        ListStore.deleteById(id)
-		setProcessor(processor.filter(user => user.id !== id))
+		swal({
+			title: "Esta seguro de Eliminar esto?",
+			text: "No podra revertir el proceso una vez eliminado!",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		  })
+		  .then((willDelete) => {
+			if (willDelete) {
+			  ListStore.deleteById(id)
+			  setProcessor(processor.filter(user => user.id !== id))
+			  swal("Eliminado Exitosamente!", {
+				icon: "success",
+			  });
+			} else {
+			  swal("Cancelado Exitosamente!");
+			}
+		  });
+       
+		
 	}
+
 	return (
 		<div className="container">
 			<div >

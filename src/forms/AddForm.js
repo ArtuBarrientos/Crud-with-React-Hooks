@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import swal from 'sweetalert';
+
 
 
 function AddForm(props) {
@@ -34,7 +36,7 @@ function AddForm(props) {
 									<input type="text" name="hilos" value={processor.hilos} onChange={handleInputChange} />
 									<label>Tdp</label>
 									<input type="text" name="tdp" value={processor.tdp} onChange={handleInputChange} />
-								
+								 
 			
 								</form>
 							</div>
@@ -42,7 +44,15 @@ function AddForm(props) {
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 							<button onClick={event => {
 									event.preventDefault()
-									if (!processor.nombre || !processor.nucleos || !processor.hilos || !processor.tdp) return
+									if (!processor.nombre || !processor.nucleos || !processor.hilos || !processor.tdp) {
+										swal({
+											title: "Toda la información debe ser llenada",
+											text: "inserta los campos porfavor",
+											icon: "warning",
+											dangerMode: true,
+											})
+									   return ""
+									}
 									props.datosAdd(processor)
 									setProcessor(initialFormState)
 			                 }}type="button" class="btn btn-primary" data-dismiss="modal">Añadir</button>

@@ -4,7 +4,7 @@ import config from '../config/secret';
 
 class ListStore {
    //CRUD STORE
-
+ 
    //DELETE
     deleteById = id =>{
       axios.delete(config.url+"/api/processor/"+id
