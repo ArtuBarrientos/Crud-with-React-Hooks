@@ -6,62 +6,38 @@ import { inject, observer } from 'mobx-react'
 
 
 function DataList({match,ListStore}){
-  //render(){
-    //const { match } = this.props;
+
     const datosId =  match.params.id
     const [datos, setDatos]= useState([])
+    const [ editing, setEditing ] = useState(false)
     const initialFormState = { id: null, image:null ,nombre: '', nucleos: '', hilos: '', tdp:'' }
-	// Setting state
-
-	const [ currentList, setCurrentList ] = useState(initialFormState)
-	const [ editing, setEditing ] = useState(false)
+    const [ currentList, setCurrentList ] = useState(initialFormState)
 
     useEffect(() => {
         axios.get(config.url+"/api/processor/"+datosId)
         .then(res => res.data)
 			  .then((data) => {
-        setDatos( data )
+          setDatos( data )
 		  })
         .catch((err) => {
           console.log(err);
         })
     } ,
        [datosId]);
+     
 
 
       const deleteId = datosId =>{
-        axios.delete(config.url+"/api/processor/"+datosId
-        )
-        .then(res => { 
-        console.log(res);
-        console.log('Eliminado exitosamente')
-        })
-        .catch(err => {
-        console.log(err);
-        });
+        ListStore.deleteById(datosId);
         setDatos(datosId)
 
     }
      
 
-    const updateList = (id, updated) => {
-      axios.put(config.url+"/api/processor/"+ id,{
-          nombre: updated.nombre, 
-          nucleos: updated.nucleos, 
-          hilos: updated.hilos, 
-          tdp: updated.tdp
-      }) 
-      .then(res => {
-      console.log(res);
-      console.log('Actualizado Correctamente')
-      })
-      .catch(err => {
-      console.log(err+" error de actualización");
-      }); 
-     
-      setDatos(datos => (datos.id === id ? updated : datos))
+    const updateList = (id, datosId) => {
+      ListStore.UpdateById(datosId);
+      setDatos(datos => (datos.id === id ? datosId : datos))
         }
-
         const editRow = datos => {
           setCurrentList({ id: datos.id, 
                    image: datos.image,
@@ -74,7 +50,6 @@ function DataList({match,ListStore}){
     
     return(
       <div className="container" style={{marginTop:"1rem"}}>
-         
           <div  className="d-flex justify-content-center">
                 <div className="card" style={{width: "20rem"}}>
                     <img src={datos.image} className="card-img-top" alt=""/>
@@ -97,7 +72,7 @@ function DataList({match,ListStore}){
                                 data-toggle="modal" data-target="#exampleModal"
                               >
                                 Editar
-                              </button>*/}
+                              </button>
                           </div>
                           <div className="col">
                               <button
@@ -119,7 +94,6 @@ function DataList({match,ListStore}){
       </div>
              )
          }
- // }
     
-export default inject("ListStore") (observer(DataList));
+ export default inject("ListStore") (observer(DataList));
 

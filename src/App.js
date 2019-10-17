@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import DataBase from './DataBase'
+import DataBase from './containers/DataBase'
 import {
     BrowserRouter as ReactRouter,
     Route
@@ -22,11 +22,6 @@ class App extends Component{
 							exact path="/Datos/:id" 
 							component={DataList}
 						>
-						</Route>
-						<Route
-							exact path="/hola" 
-						>
-						
 						</Route>
 				</ReactRouter>
 
