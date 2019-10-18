@@ -43,7 +43,8 @@ class ListStore {
           nombre: references.nombre,
           nucleos: references.nucleos,
           hilos: references.hilos,
-          tdp: references.tdp
+          tdp: references.tdp,
+          image: references.image
         })
         .then(res => {
         console.log(res);

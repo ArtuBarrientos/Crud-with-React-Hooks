@@ -4,7 +4,7 @@ import swal from 'sweetalert';
 
 
 function AddForm(props) {
-	const initialFormState = { id: null, nombre: '', nucleos: '', hilos: '', tdp: '' }
+	const initialFormState = { id: null, nombre: '', nucleos: '', hilos: '', tdp: '', image:'' }
 	const [ processor, setProcessor ] = useState(initialFormState)
     
 	const handleInputChange = event => {
@@ -36,6 +36,9 @@ function AddForm(props) {
 									<input type="text" name="hilos" value={processor.hilos} onChange={handleInputChange} />
 									<label>Tdp</label>
 									<input type="text" name="tdp" value={processor.tdp} onChange={handleInputChange} />
+									<label>Imagen</label>
+									<input type="text" name="image" value={processor.image} onChange={handleInputChange} />
+									
 								 
 			
 								</form>
@@ -44,7 +47,7 @@ function AddForm(props) {
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 							<button onClick={event => {
 									event.preventDefault()
-									if (!processor.nombre || !processor.nucleos || !processor.hilos || !processor.tdp) {
+									if (!processor.nombre || !processor.nucleos || !processor.hilos || !processor.tdp || !processor.image) {
 										swal({
 											title: "Toda la información debe ser llenada",
 											text: "inserta los campos porfavor",

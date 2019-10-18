@@ -61,6 +61,12 @@ function DataList({match,ListStore}){
     const updateList = (id, datosId) => {
       ListStore.UpdateById(datosId);
       setDatos(datos => (datos.id === id ? datosId : datos))
+      swal({
+        title: "Actualizado Exitosamente!",
+        text: "",
+        icon: "success",
+        button: "Ok",
+        })
         }
         const editRow = datos => {
           setCurrentList({ id: datos.id, 
@@ -75,18 +81,18 @@ function DataList({match,ListStore}){
     return(
       <div className="container" style={{marginTop:"1rem"}}>
           <div  className="d-flex justify-content-center">
-                <div className="card" style={{width: "20rem"}}>
-                    <img src={datos.image} className="card-img-top" alt=""/>
+                <div className="card border-primary mb-3" style={{width: "20rem"}}>
+                    <img src={datos.image} className="card-img-top" alt="" style={{borderRadius:"4em"}}/>
                     <div className="card-body">
                         <h2 className="card-title">{datos.nombre}</h2>
                         <h4 className="card-text">Datos</h4>
                     </div>
-                    <ul className="list-group list-group-flush" >
+                    <ul className="list-group list-group-flush">
                         <li className="list-group-item">Nucleos: {datos.nucleos}</li>
                         <li className="list-group-item">Hilos: {datos.hilos}</li>
                         <li className="list-group-item">Tdp: {datos.tdp}</li>
                     </ul>
-                    <div className="row card-body">
+                    <div className="row card-body" >
                           <div className="col">
                                 <button 
                                   onClick={() => {
@@ -99,14 +105,15 @@ function DataList({match,ListStore}){
                                 </button>
                           </div>
                           <div className="col">
-                                <button
+                              
+                                  <button
                                   onClick={()=>deleteId(datos.id)} 
                                   className="button muted-button"
                                   >
                                   Eliminar
                                 </button>
-                                <Link to="/">
-                                </Link>
+                               
+                                
                           </div>  
                     </div>
                 </div>
