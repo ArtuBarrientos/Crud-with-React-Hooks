@@ -4,7 +4,6 @@ import config from '../config/secret';
 import EditForm from '../forms/EditForm';
 import { inject, observer } from 'mobx-react';
 import swal from 'sweetalert';
-import { Link } from 'react-router-dom';
 
 
 
@@ -58,6 +57,7 @@ function DataList({match,ListStore}){
    
 
 //actualizar
+
     const updateList = (id, datosId) => {
       ListStore.UpdateById(datosId);
       setDatos(datos => (datos.id === id ? datosId : datos))
@@ -68,6 +68,8 @@ function DataList({match,ListStore}){
         button: "Ok",
         })
         }
+
+        
         const editRow = datos => {
           setCurrentList({ id: datos.id, 
                    image: datos.image,
